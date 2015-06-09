@@ -28,7 +28,7 @@ ini_set('display_errors', true);
 error_reporting(E_ALL);
 
 $rota = parse_url("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-$path = str_replace("/", "", $rota['path']);
+$path = ltrim($rota['path'], "/");
 echo $path;
  
 ?>
@@ -47,8 +47,10 @@ echo $path;
             if(file_exists($path.".php")){
                 require_once ($path.".php");
             }
-            else{
-                require_once ("404.php");
+            else if ($path == '' || $path == '/'){
+                require_once ("home.php");
+            } else {
+            	require_once ("404.php");
             }
         ?>
     </div>
