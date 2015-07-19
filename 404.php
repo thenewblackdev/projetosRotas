@@ -24,6 +24,8 @@
  * 
  */
 
+header("HTTP/1.0 404 Not Found");
+
 ?>
 
 <div class="alert alert-danger" role="alert">

@@ -43,16 +43,16 @@ echo $path;
 
 <div class="container">
     <div class="row">
-        <?php
-            if(file_exists($path.".php")){
-                require_once ($path.".php");
-            }
-            else if ($path == '' || $path == '/'){
-                require_once ("home.php");
-            } else {
-            	require_once ("404.php");
-            }
-        ?>
+    	<?php $rotasValidas = array('home', 'empresa', 'produtos', 'servicos', 'contato'); ?>
+        <?php if (!in_array($path, $rotasValidas) || !file_exists($path.".php") AND $path != ""): ?>
+        	<?php require_once ("404.php"); ?>
+        	<?php else: ?>
+        	<?php if ($path == ""): ?>
+        		<?php require_once ("home.php"); ?>
+        	<?php else: ?>
+        		<?php require_once ($path.".php"); ?>
+        	<?php endif ?>
+        <?php endif ?>
     </div>
 </div>
 
